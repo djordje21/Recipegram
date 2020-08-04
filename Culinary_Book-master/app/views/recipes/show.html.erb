@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="col-md-5">
+	<%= image_tag @recipe.recipe_img.url(:recipe_show), class: "book-show" %>
+
+	</div>
+
+	<div class="col-md-9">	
+		<h2><%= @recipe.title %></h2>
+		<h3><%= @recipe.author %></h3>
+		<p><%= @recipe.preparation %></p>
+	</div>
+
+</div>
+
+<div class="row">
+
+	<div class="col-md-5">
+		<!-- Moje mesto za review/rating -->
+		<%= render @recipe.reviews %>
+		<div>
+			<%= link_to "Add Review", new_recipe_review_path(@recipe)  %>
+		</div>
+	</div>
+
+
+</div>
+
+
+<%=	link_to "Back", root_path  %>
+
+<% if user_signed_in? %>
+<% if @recipe.user_id == current_user.id %>
+
+<%= link_to "Edit", edit_recipe_path(@recipe) %>
+<%= link_to "Delete", recipe_path(@recipe), method: :delete, data: { confirm: "Are you sure?"} %>
+<% end %>
+<% end %>

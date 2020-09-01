@@ -1,0 +1,10 @@
+<h1> Edit recipe </h1>
+
+<%= simple_form_for @recipe, :html => {:multipart => true} do |f| %>
+  <%= f.select :category_id, @categories %>
+  <%= f.file_field :recipe_img %>
+  <%= f.input :title, label: "Recipe Title" %>
+  <%= f.input :description %>
+  <%= f.input :author %>
+  <%= f.button :submit %>
+<% end %>

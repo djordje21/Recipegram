@@ -1,0 +1,11 @@
+<h1>Edit Comment</h1>
+<%= simple_form_for ([@recipe,@comment]) do |f| %>
+	 <p>
+	 	<%= f.label :comment %><br>
+	 	<%= f.text_area :comment %>
+	 </p>
+	 <br>
+	 <p>
+	 	<%= f.submit %>
+	 </p>
+ <% end %>

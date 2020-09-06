@@ -3,7 +3,7 @@
 class CommentsController < ApplicationController
   before_action :find_recipe
   before_action :find_comment, only: %i[edit update destroy]
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, only: %i[new edit]
 
   def new
     @comment = Comment.new
@@ -21,6 +21,12 @@ class CommentsController < ApplicationController
   end
 
   def edit; end
+
+  def vote
+    value = params[:type] == 'Like' ? 1 : -1
+    @recipe.comment.add_or_update_evaluation(:votes, value, current_user)
+    redirect_to :back, notice: 'Thanks!'
+  end
 
   def destroy
     @comment.destroy

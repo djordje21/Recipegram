@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  acts_as_voter
   has_many :recipes
   has_many :comments
   # Include default devise modules. Others available are:

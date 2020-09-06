@@ -11,23 +11,52 @@
 
   <body>
 
-      <nav class="navbar navbar-default">
-
+   <nav class="navbar navbar-default">
     <div class="container">
-
       <div class="navbar-header">
         <%= link_to "Recipe Blog", root_path, class: "navbar-brand" %>
       </div>
+         <ul class="nav navbar-nav">
+             <li><%= link_to "Sign Up", new_user_registration_path %></li>
+                    
+                    <!-- Facebook login -->
 
-      <ul class="nav navbar-nav">
-        <li><%= link_to "Sign Up", new_user_registration_path %></li>
-        <% if user_signed_in? %>
-          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-        <% else %>  
-          <li><%= link_to "Log In", new_user_session_path %></li>
-        <% end %>
+            <div id="fb-root"></div>
+              <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=741967299712838&autoLogAppEvents=1" nonce="fbgofdr1"></script>
+              <script>
+                window.fbAsyncInit = function() {
+                  FB.init({
+                    appId      : '{741967299712838}',
+                    cookie     : true,
+                    xfbml      : true,
+                    version    : '{api-version}'
+                  });  
+                  FB.AppEvents.logPageView();       
+                  };
+                 (function(d, s, id){
+                   var js, fjs = d.getElementsByTagName(s)[0];
+                   if (d.getElementById(id)) {return;}
+                     js = d.createElement(s); js.id = id;
+                     js.src = "https://connect.facebook.net/en_US/sdk.js";
+                     fjs.parentNode.insertBefore(js, fjs);
+                     }(document, 'script', 'facebook-jssdk'));
+
+                    FB.getLoginStatus(function(response) {
+                       statusChangeCallback(response);
+                    });
+            </script>
+
+            <!-- Sign in/Log in -->
+
+            <% if user_signed_in? %>
+              <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+            <% else %>  
+              <li><%= link_to "Log In", new_user_session_path %></li>
+            <% end %>
       </ul>
-  
+      
+         <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
+
         <% if user_signed_in? %>
           <ul class="nav navbar-nav navbar-right"><li><%= link_to "Add Recipe", new_recipe_path %></li></ul>
         <% end %>
@@ -38,7 +67,9 @@
     <p class="alert"><%= alert %></p>
 
     <div class="container">
+
     <%= yield %>
+
     </div>
   </body>
 </html>

@@ -49,6 +49,7 @@ GEM
     activerecord (6.0.3.2)
       activemodel (= 6.0.3.2)
       activesupport (= 6.0.3.2)
+    activerecord-reputation-system (3.0.1)
     activestorage (6.0.3.2)
       actionpack (= 6.0.3.2)
       activejob (= 6.0.3.2)
@@ -60,7 +61,6 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
-    acts_as_votable (0.12.1)
     ast (2.4.1)
     autoprefixer-rails (9.8.6.3)
       execjs
@@ -274,7 +274,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts_as_votable
+  activerecord-reputation-system
   bootsnap (>= 1.4.2)
   bootstrap-sass (~> 3.4, >= 3.4.1)
   byebug

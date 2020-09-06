@@ -2,7 +2,7 @@
 
 class RecipesController < ApplicationController
   before_action :find_recipe, only: %i[show edit update destroy vote]
-  before_action :authenticate_user!, only: [:new, :edit, :vote]
+  before_action :authenticate_user!, only: %i[new edit vote]
 
   def index
     if params[:category].blank?
@@ -44,10 +44,17 @@ class RecipesController < ApplicationController
     end
   end
 
+  def vote
+    value = params[:type] == 'Like' ? 1 : -1
+    @recipe.add_or_update_evaluation(:votes, value, current_user)
+    redirect_to :back, notice: 'Thanks!'
+  end
+
   def destroy
     @recipe.destroy
     redirect_to root_path
   end
+
 
   private
 
